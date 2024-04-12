@@ -91,12 +91,6 @@ class App extends Component {
 		}))
 	}
 
-	onAllEmployees = () => {
-		let counter = 0;
-		this.state.data.forEach(item => counter++);
-		return counter;
-	}
-
     render() {
 		const employees = this.state.data.length;
 		const increased = this.state.data.filter(item => item.increase).length;
