@@ -9,30 +9,30 @@ class AppFilter extends Component{
 	constructor(props) {
 		super(props);
 		this.state = {
-			activeTab: 'tab1' 
+			filter: '',
+			tab: 'tab1' 
 		}
 	}
 
 	onChangeFilter = (e, tab) => {
-		this.setState({
-			activeTab: tab
-		});
-		this.props.onChangeFilter(e.target.getAttribute('data-filter'));
+		const filter = e.target.getAttribute('data-filter');
+		this.setState({filter, tab});
+		this.props.onChangeFilter(filter);
 	}
     render() {
-		const { activeTab } = this.state;
+		const { tab } = this.state;
 		return (
 			<div className="btn-group">
 				<button 
-					className={activeTab === 'tab1' ? 'btn btn-light' : 'btn btn-outline-light'}
+					className={tab === 'tab1' ? 'btn btn-light' : 'btn btn-outline-light'}
 					type="button"
-					data-filter="all"
+					data-filter=""
 					onClick={(e) => this.onChangeFilter(e, 'tab1')}>	
 						Все сотрудники
 				</button>
 	
 				<button 
-					className={activeTab === 'tab2' ? 'btn btn-light' : 'btn btn-outline-light'}
+					className={tab === 'tab2' ? 'btn btn-light' : 'btn btn-outline-light'}
 					type="button"
 					data-filter="rise"
 					onClick={(e) => this.onChangeFilter(e, 'tab2')}>	
@@ -40,7 +40,7 @@ class AppFilter extends Component{
 				</button>
 	
 				<button 
-					className={activeTab === 'tab3' ? 'btn btn-light' : 'btn btn-outline-light'}
+					className={tab === 'tab3' ? 'btn btn-light' : 'btn btn-outline-light'}
 					type="button"
 					data-filter="higher"
 					onClick={(e) => this.onChangeFilter(e,'tab3')}>	

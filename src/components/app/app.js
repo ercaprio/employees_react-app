@@ -77,24 +77,22 @@ class App extends Component {
 		this.setState({filter})
 	}
 
-	onFilter = (filter) => {
+	onFilter = (items, filter) => {
 		switch (filter) {
-			case 'all':
-				return this.searchEmp(this.state.data, this.state.term);
 			case 'rise':
-				return this.searchEmp(this.state.data.filter(item => item.rise), this.state.term);
+				return items.filter(item => item.rise);
 			case 'higher':
-				return this.searchEmp(this.state.data.filter(item => item.salary > 1000), this.state.term);
+				return items.filter(item => item.salary > 1000);
 			default:
-				return this.state.data;
+				return items;
 		}
 	}
 
     render() {
-		const {data, filter,} = this.state;
-		const visibleData = this.onFilter(filter);
-		const employees = data.length;
-		const increased = data.filter(item => item.increase).length;
+		const {data, term, filter} = this.state;
+		const visibleData = this.onFilter(this.searchEmp(data, term), filter);
+		const employees = visibleData.length;
+		const increased = visibleData.filter(item => item.increase).length;
 		return (
 			<div className="app">
 				<AppInfo
